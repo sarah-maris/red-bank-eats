@@ -30,9 +30,9 @@ A new browser window should automatically open displaying the app.  If it doesn'
 
 ### Resources and Documentation:
 * [Create-react-app Documentation](https://github.com/facebookincubator/create-react-app)
-* [React Router Documentation](http://knowbody.github.io/react-router-docs/)
-* [React Training/React Router](https://reacttraining.com/react-router/web/api/BrowserRouter)
 * [React API](https://facebook.github.io/react/docs/react-api.html)
+* [react-google-maps](https://tomchentw.github.io/react-google-maps/#documentation)
+
 
 ### Udacity Resources:
 * [Project Rubric](https://review.udacity.com/#!/rubrics/1351/view)
