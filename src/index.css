@@ -3,3 +3,28 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.list {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.7);
+  height:100%;
+  position: absolute;
+  width: 300px;
+  z-index: 5;
+}
+
+.map {
+  height: 100vh;
+}
+
+.toggle {
+  background: #fff;
+  border: 2px solid #888;
+  border-radius: 5px;
+  fill: #888;
+  position: absolute;
+  width:40px;
+  z-index: 5;
+  right: 10px;
+  top: 10px;
+}

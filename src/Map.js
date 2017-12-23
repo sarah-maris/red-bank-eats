@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
+import {mapStyles} from './utils/mapStyles.js'
 
 const locations = [
           {title: 'Park Ave Penthouse', position: {lat: 40.7713024, lng: -73.9632393}},
@@ -10,6 +11,7 @@ const locations = [
           {title: 'Chinatown Homey Space', position: {lat: 40.7180628, lng: -74.9961237}}
         ];
 
+console.log("here", mapStyles)
 
 // https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require
 class Map extends Component{
@@ -18,8 +20,9 @@ class Map extends Component{
         if (isScriptLoadSucceed) {
 
             const map = new window.google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: {lat: 40.7413549, lng: -73.9980244}
+              zoom: 12,
+              center: {lat: 40.7413549, lng: -73.9980244},
+              styles: mapStyles
             });
             const bounds = new window.google.maps.LatLngBounds();
 
@@ -54,9 +57,8 @@ class Map extends Component{
 
     render(){
         return(
-            <div>
-                <div id="map" style={{height: "600px"}}></div>
-            </div>
+                <div id="map" className="map"></div>
+
         )
     }
 }
