@@ -31,7 +31,8 @@ A new browser window should automatically open displaying the app.  If it doesn'
 ### Resources and Documentation:
 * [Create-react-app Documentation](https://github.com/facebookincubator/create-react-app)
 * [React API](https://facebook.github.io/react/docs/react-api.html)
-* [react-google-maps](https://tomchentw.github.io/react-google-maps/#documentation)
+* https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require
+* https://www.npmjs.com/package/react-async-script-loader
 
 
 ### Udacity Resources:
