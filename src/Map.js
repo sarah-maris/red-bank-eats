@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
 import {mapStyles} from './utils/mapStyles.js';
+import spinner from './images/circles-loader.svg';
 
+// TODO:  move locations to separate file
 const locations = [
           {title: 'Park Ave Penthouse', position: {lat: 40.7713024, lng: -73.9632393}},
           {title: 'Chelsea Loft', position: {lat: 40.7444883, lng: -73.9949465}},
@@ -32,6 +34,7 @@ class Map extends Component{
 
       this.setState({map: map});
 
+      // TODO: Move markers to separate component
       const bounds = new window.google.maps.LatLngBounds();
       const infowindow = new window.google.maps.InfoWindow();
 
@@ -58,6 +61,7 @@ class Map extends Component{
       // size and center map
       map.fitBounds(bounds);
 
+    // alert user if map request fails
     } else if ( !this.state.map.zoom ) {
       alert("Map did not load");
     }
@@ -66,7 +70,10 @@ class Map extends Component{
     render(){
         return(
           <div id="map" className="map">
-            Loading...
+              <div className="loading">
+                <h4 className="loading-message">Map is loading...</h4>
+                <img src={spinner} className="spinner" alt="loading indicator" />
+             </div>
           </div>
         )
     }

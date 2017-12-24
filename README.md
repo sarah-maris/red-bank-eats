@@ -33,6 +33,7 @@ A new browser window should automatically open displaying the app.  If it doesn'
 * [React API](https://facebook.github.io/react/docs/react-api.html)
 * https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require
 * https://www.npmjs.com/package/react-async-script-loader
+* [SVG-Loaders by Sam Herber](https://github.com/SamHerbert/SVG-Loaders)
 
 
 ### Udacity Resources:

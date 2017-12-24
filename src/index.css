@@ -41,6 +41,19 @@ body {
   transform: translate(0, 0);
 }
 
+.loading {
+  display:flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  text-align:center;
+}
+
+.loading-message {
+  font-style:italic;
+  font-weight: 300;
+}
 @media (min-width: 600px) {
 
   .list {
@@ -58,3 +71,9 @@ body {
     display: none;
   }
 }
+
+
+/* colors
+lt green: #aee9c6
+mid blue: #3594c5
+*/
