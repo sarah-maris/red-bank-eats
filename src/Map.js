@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
-import {mapStyles} from './utils/mapStyles.js'
+import {mapStyles} from './utils/mapStyles.js';
 
 const locations = [
           {title: 'Park Ave Penthouse', position: {lat: 40.7713024, lng: -73.9632393}},
@@ -11,20 +11,29 @@ const locations = [
           {title: 'Chinatown Homey Space', position: {lat: 40.7180628, lng: -74.9961237}}
         ];
 
-// https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require
+
 class Map extends Component{
 
-  componentWillReceiveProps({isScriptLoadSucceed}){
-    if (isScriptLoadSucceed) {
+  state = {
+    map: {}
+  }
 
+  componentWillReceiveProps({isScriptLoadSucceed}){
+
+    // Check if script is loaded and if map is defined
+    if (isScriptLoadSucceed && !this.state.map.zoom ) {
+
+      // create map
       const map = new window.google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: {lat: 40.7413549, lng: -73.9980244},
         styles: mapStyles
       });
 
+      this.setState({map: map});
+
       const bounds = new window.google.maps.LatLngBounds();
-      const infowindow = new window.google.maps.InfoWindow()
+      const infowindow = new window.google.maps.InfoWindow();
 
       locations.forEach( (location) =>  {
         location.marker = new window.google.maps.Marker({
@@ -49,21 +58,20 @@ class Map extends Component{
       // size and center map
       map.fitBounds(bounds);
 
-    } else {
+    } else if ( !this.state.map.zoom ) {
       alert("Map did not load");
     }
   }
 
     render(){
         return(
-                <div id="map" className="map">
-                  Loading...
-                </div>
-
+          <div id="map" className="map">
+            Loading...
+          </div>
         )
     }
 }
 
 export default scriptLoader(
     ["https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZ3NiZU9KDjErK3LtaB0LogaW6GOFXYg"]
-)(Map)
+)(Map);
