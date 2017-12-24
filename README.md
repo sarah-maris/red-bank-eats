@@ -40,6 +40,7 @@ A new browser window should automatically open displaying the app.  If it doesn'
 * [Udacity CSS Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
 * [Udacity HTML Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/index.html)
 * [Udacity JavaScript Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
+* [Udacity Responsive Web Design Fundamentals Course > Pattern - Off Canvas lesson](https://classroom.udacity.com/courses/ud893/lessons/3561069759/concepts/35307193050923)
 
 
 *This project is licensed under the terms of the MIT license.*

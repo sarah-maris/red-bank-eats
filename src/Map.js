@@ -11,53 +11,54 @@ const locations = [
           {title: 'Chinatown Homey Space', position: {lat: 40.7180628, lng: -74.9961237}}
         ];
 
-console.log("here", mapStyles)
-
 // https://stackoverflow.com/questions/41709765/how-to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require
 class Map extends Component{
 
-    componentWillReceiveProps({isScriptLoadSucceed}){
-        if (isScriptLoadSucceed) {
+  componentWillReceiveProps({isScriptLoadSucceed}){
+    if (isScriptLoadSucceed) {
 
-            const map = new window.google.maps.Map(document.getElementById('map'), {
-              zoom: 12,
-              center: {lat: 40.7413549, lng: -73.9980244},
-              styles: mapStyles
-            });
-            const bounds = new window.google.maps.LatLngBounds();
+      const map = new window.google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat: 40.7413549, lng: -73.9980244},
+        styles: mapStyles
+      });
 
-            const infowindow = new window.google.maps.InfoWindow()
+      const bounds = new window.google.maps.LatLngBounds();
+      const infowindow = new window.google.maps.InfoWindow()
 
-          locations.forEach( (location) =>  {
-            location.marker = new window.google.maps.Marker({
-              position: location.position,
-              map: map,
-              title: location.title
-            });
-           bounds.extend(location.position);
+      locations.forEach( (location) =>  {
+        location.marker = new window.google.maps.Marker({
+          position: location.position,
+          map: map,
+          title: location.title
+        });
+        bounds.extend(location.position);
 
-           location.marker.addListener('click', function() {
-             infowindow.setContent(this.title);
-             infowindow.open(map, this)
-             console.log("here")
-           })
-         })
-          map.fitBounds(bounds);
+        location.marker.addListener('click', function() {
+          const marker = this;
+          infowindow.setContent(marker.title);
+          infowindow.open(map, marker);
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          setTimeout(function() {
+            marker.setAnimation(null);
+          }, 2100);
+        });
 
-        }
-        else{
-            alert("Map did not load")
-        }
+      });
+
+      // size and center map
+      map.fitBounds(bounds);
+
+    } else {
+      alert("Map did not load");
     }
-
-    openWindow =  function() {
-      console.log(this)
-
-    }
+  }
 
     render(){
         return(
-                <div id="map" className="map"></div>
+                <div id="map" className="map">
+                  Loading...
+                </div>
 
         )
     }

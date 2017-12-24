@@ -11,10 +11,16 @@ body {
   position: absolute;
   width: 300px;
   z-index: 5;
+  /* This trasform moves the drawer off canvas. */
+  -webkit-transform: translate(-300px, 0);
+  transform: translate(-300px, 0);
+  /* Optionally, we animate the drawer. */
+  transition: transform 0.3s ease;
 }
 
 .map {
   height: 100vh;
+  width: calc(100vw -300px);
 }
 
 .toggle {
@@ -23,8 +29,32 @@ body {
   border-radius: 5px;
   fill: #888;
   position: absolute;
-  width:40px;
-  z-index: 5;
   right: 10px;
   top: 10px;
+  width:40px;
+  z-index: 5;
+}
+
+.open {
+  -ms-transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+@media (min-width: 600px) {
+
+  .list {
+    position:relative;
+    -ms-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+
+  .map {
+    margin-left: 300px
+  }
+
+  .toggle {
+    display: none;
+  }
 }
