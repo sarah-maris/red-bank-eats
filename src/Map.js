@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
-import {mapStyles} from './utils/mapStyles.js';
+import { places } from './data/model.js';
+import { mapStyles } from './data/mapStyles.js';
 import spinner from './images/circles-loader.svg';
-
-// TODO:  move locations to separate file
-const locations = [
-          {title: 'Park Ave Penthouse', position: {lat: 40.7713024, lng: -73.9632393}},
-          {title: 'Chelsea Loft', position: {lat: 40.7444883, lng: -73.9949465}},
-          {title: 'Union Square Open Floor Plan', position: {lat: 40.7347062, lng: -73.9895759}},
-          {title: 'East Village Hip Studio', position: {lat: 40.7281777, lng: -73.984377}},
-          {title: 'TriBeCa Artsy Bachelor Pad', position: {lat: 40.7195264, lng: -74.0089934}},
-          {title: 'Chinatown Homey Space', position: {lat: 40.7180628, lng: -74.9961237}}
-        ];
-
 
 class Map extends Component{
 
@@ -38,7 +28,7 @@ class Map extends Component{
       const bounds = new window.google.maps.LatLngBounds();
       const infowindow = new window.google.maps.InfoWindow();
 
-      locations.forEach( (location) =>  {
+      places.forEach( (location) =>  {
         location.marker = new window.google.maps.Marker({
           position: location.position,
           map: map,
