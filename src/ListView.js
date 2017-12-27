@@ -25,6 +25,10 @@ class ListView extends Component {
     this.setState({listPlaces: result })
   }
 
+  showInfo = (place) => {
+    console.log("clicked", place)
+  }
+
   render() {
     const {listPlaces, query} = this.state;
 
@@ -38,7 +42,12 @@ class ListView extends Component {
         {listPlaces.length > 0 ?
         <ul className="places-list">
           {listPlaces.map((place, id) =>
-          <li key={id} className="place">{place.title}</li>
+          <li
+            key={id}
+            className="place"
+            onClick={this.showInfo.bind(this, place)}
+            >{place.title}
+          </li>
           )}
         </ul>
         : <p className="filterErr">No places match filter</p>
