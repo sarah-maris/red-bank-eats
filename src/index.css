@@ -17,11 +17,16 @@ body {
   transition: transform 0.3s ease;
   width: 260px;
   z-index: 5;
+  /* This trasform moves the drawer off canvas. */
+  -webkit-transform: translate(-300px, 0);
+  transform: translate(-300px, 0);
+  /* Optionally, we animate the drawer. */
+  transition: transform 0.3s ease;
 }
 
 .map {
   height: 100vh;
-  width: calc(100vw -300px);
+  width: calc(100vw - 300px);
 }
 
 
