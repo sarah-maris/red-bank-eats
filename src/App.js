@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Map from './Map'
-
+import ListView from './ListView'
 
 class App extends Component {
 
@@ -13,7 +13,8 @@ class App extends Component {
 
   render() {
 
-  const { listOpen } = this.state;
+    const { listOpen } = this.state;
+
     return (
       <div className="container">
         <div id="menu" className="toggle" onClick={this.toggleList}>
@@ -21,7 +22,9 @@ class App extends Component {
             <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
           </svg>
         </div>
-          <div className={ listOpen ? "list open" : "list"}></div>
+        <div className={ listOpen ? "list open" : "list"}>
+          <ListView />
+        </div>
         <Map />
       </div>
     );

@@ -7,20 +7,48 @@ body {
 .list {
   background: #fff;
   background: rgba(255, 255, 255, 0.7);
-  height:100%;
+  border-radius: 20px;
+  padding: 20px;
   position: absolute;
-  width: 300px;
-  z-index: 5;
   /* This trasform moves the drawer off canvas. */
-  -webkit-transform: translate(-300px, 0);
-  transform: translate(-300px, 0);
+  -webkit-transform: translate(-260px, 0);
+  transform: translate(-260px, 0);
   /* Optionally, we animate the drawer. */
   transition: transform 0.3s ease;
+  width: 260px;
+  z-index: 5;
 }
 
 .map {
   height: 100vh;
   width: calc(100vw -300px);
+}
+
+
+.places-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.place {
+  margin: 10px 0;
+}
+
+.query {
+    border: 5px solid #fff;
+    border-radius: 10px;
+    -webkit-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    -moz-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    font-size: 18px;
+    padding: 10px;
+    margin: 0 0 10px 0;
 }
 
 .toggle {
@@ -54,10 +82,11 @@ body {
   font-style:italic;
   font-weight: 300;
 }
+
+
 @media (min-width: 600px) {
 
   .list {
-    position:relative;
     -ms-transform: translate(0, 0);
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
