@@ -96,7 +96,7 @@ class ListView extends Component {
     return (
       <div className="list-view">
         <input type="text"
-          placeholder="filter locations"
+          placeholder="filter by name"
           value={ query }
           onChange={ this.filterPlaces }
           className="query"
