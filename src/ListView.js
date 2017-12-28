@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { places } from './data/model.js';
+import PropTypes from 'prop-types'
 
 class ListView extends Component {
+
+  static propTypes = {
+    map: PropTypes.object.isRequired,
+    infowindow: PropTypes.object.isRequired,
+    bounds: PropTypes.object.isRequired
+  }
 
   state = {
     query: '',
@@ -10,6 +17,35 @@ class ListView extends Component {
 
   componentDidMount () {
     this.setState({listPlaces: places});
+    this.addMarkers();
+  }
+
+  addMarkers () {
+    const { map, infowindow, bounds } = this.props;
+
+    places.forEach( (location) =>  {
+      location.marker = new window.google.maps.Marker({
+        position: location.position,
+        map: map,
+        title: location.title
+      });
+
+      bounds.extend(location.position);
+
+      location.marker.addListener('click', function() {
+        const marker = this;
+        infowindow.setContent(marker.title);
+        infowindow.open(map, marker);
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(function() {
+          marker.setAnimation(null);
+        }, 2100);
+      });
+
+    });
+
+    // size and center map
+    map.fitBounds(bounds);
   }
 
   filterPlaces = (event) => {
@@ -26,7 +62,8 @@ class ListView extends Component {
   }
 
   showInfo = (place) => {
-    console.log("clicked", place)
+    // force marker click
+    window.google.maps.event.trigger(place.marker,'click');
   }
 
   render() {
@@ -38,7 +75,8 @@ class ListView extends Component {
           placeholder="filter locations"
           value={ query }
           onChange={ this.filterPlaces }
-          className='query'/>
+          className="query"
+        />
         {listPlaces.length > 0 ?
         <ul className="places-list">
           {listPlaces.map((place, id) =>
@@ -50,7 +88,7 @@ class ListView extends Component {
           </li>
           )}
         </ul>
-        : <p className="filterErr">No places match filter</p>
+        : <p className="error">No places match filter</p>
         }
       </div>
     );

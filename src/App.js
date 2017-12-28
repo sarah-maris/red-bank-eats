@@ -1,11 +1,47 @@
 import React, { Component } from 'react';
+import scriptLoader from 'react-async-script-loader';
+import { mapStyles } from './data/mapStyles.js';
 import './App.css';
-import Map from './Map'
 import ListView from './ListView'
+import spinner from './images/circles-loader.svg';
 
 class App extends Component {
 
-  state = { listOpen: true }
+  state = {
+    listOpen: true,
+    map: {},
+    infowindow: {},
+    bounds: {},
+    mapReady: false
+  }
+  componentWillReceiveProps({isScriptLoadSucceed}){
+
+    // Check if script is loaded and if map is defined
+    if (isScriptLoadSucceed && !this.state.mapReady ) {
+
+      // create map
+      const map = new window.google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat: 40.7413549, lng: -73.9980244},
+        styles: mapStyles
+      });
+
+      // set up bounds and infowindow to use later
+      const bounds = new window.google.maps.LatLngBounds();
+      const infowindow = new window.google.maps.InfoWindow();
+
+      this.setState({
+        map: map,
+        infowindow: infowindow,
+        bounds: bounds,
+        mapReady: true,
+      });
+
+    // alert user if map request fails
+    } else if ( !this.state.mapReady ) {
+      alert("Map did not load");
+    }
+  }
 
   toggleList = () => {
     this.setState( { listOpen: !this.state.listOpen})
@@ -13,7 +49,7 @@ class App extends Component {
 
   render() {
 
-    const { listOpen } = this.state;
+    const { listOpen, map, infowindow, bounds, mapReady } = this.state;
 
     return (
       <div className="container">
@@ -23,12 +59,27 @@ class App extends Component {
           </svg>
         </div>
         <div className={ listOpen ? "list open" : "list"}>
-          <ListView />
+          { /* render markers only when map has loaded */
+            mapReady ?
+            <ListView
+              map={map}
+              infowindow={infowindow}
+              bounds={bounds}
+            />
+            : <p className="error"> Map has not loaded </p>
+          }
         </div>
-        <Map />
+        <div id="map" className="map">
+            <div className="loading">
+              <h4 className="loading-message">Map is loading...</h4>
+              <img src={spinner} className="spinner" alt="loading indicator" />
+           </div>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default scriptLoader(
+    ["https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZ3NiZU9KDjErK3LtaB0LogaW6GOFXYg"]
+)(App);
