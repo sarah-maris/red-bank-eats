@@ -32,7 +32,10 @@ body {
   max-width: 100%;
 }
 .places-list {
+  height: 500px;
   list-style-type: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 0;
 }
 
@@ -109,6 +112,10 @@ body {
 
   .toggle {
     display: none;
+  }
+
+  .places-list {
+    height: 60vh;
   }
 }
 

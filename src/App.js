@@ -13,8 +13,13 @@ class App extends Component {
     map: {},
     infowindow: {},
     bounds: {},
-    mapReady: false
+    mapReady: false,
+    // future use - location search
+    mapCenter : { lat: 40.346074, lng: -74.067858 }
   }
+
+
+
   componentWillReceiveProps({isScriptLoadSucceed}){
 
     // Check if script is loaded and if map is defined
@@ -23,7 +28,7 @@ class App extends Component {
       // create map
       const map = new window.google.maps.Map(document.getElementById('map'), {
         zoom: 12,
-        center: {lat: 40.7413549, lng: -73.9980244},
+        center: this.state.mapCenter,
         styles: mapStyles
       });
 
@@ -50,7 +55,7 @@ class App extends Component {
 
   render() {
 
-    const { listOpen, map, infowindow, bounds, mapReady } = this.state;
+    const { listOpen, map, infowindow, bounds, mapReady, mapCenter } = this.state;
 
     return (
       <div className="container">
@@ -68,6 +73,7 @@ class App extends Component {
               map={map}
               infowindow={infowindow}
               bounds={bounds}
+              mapCenter={mapCenter}
             />
             : <p className="error"> Map has not loaded </p>
           }
