@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
+import { MAP_KEY } from '../data/credentials'
 import { mapStyles } from '../data/mapStyles.js';
 import ListView from './ListView'
 import spinner from '../images/circles-loader.svg';
@@ -93,5 +94,5 @@ class App extends Component {
 }
 
 export default scriptLoader(
-    ["https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZ3NiZU9KDjErK3LtaB0LogaW6GOFXYg"]
+    [`https://maps.googleapis.com/maps/api/js?key=${MAP_KEY}`]
 )(App);

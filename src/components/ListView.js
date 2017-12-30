@@ -23,7 +23,6 @@ class ListView extends Component {
   }
 
   componentDidMount () {
-console.log(CLIENT_ID)
     this.getFSLocations()
     .then( places => this.addMarkers(places));
   }
