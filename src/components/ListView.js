@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import noImage from './images/no-image-available.png';
-import fsButton from './images/foursquare-button.png';
-import foodIcon from './images/food-marker.png';
+import { CLIENT_ID, CLIENT_SECRET } from '../data/credentials'
+import noImage from '../images/no-image-available.png';
+import fsButton from '../images/foursquare-button.png';
+import foodIcon from '../images/food-marker.png';
 import PropTypes from 'prop-types';
 
 class ListView extends Component {
@@ -22,7 +23,7 @@ class ListView extends Component {
   }
 
   componentDidMount () {
-
+console.log(CLIENT_ID)
     this.getFSLocations()
     .then( places => this.addMarkers(places));
   }
@@ -65,9 +66,6 @@ class ListView extends Component {
   getFSLocations = () => {
     const { mapCenter } = this.props;
     const fSURL = 'https://api.foursquare.com/v2/venues/';
-    const CLIENT_ID = 'PODXK0FF2KJDN3B2R1JSDYI2PRFR1WZLI1VVJUCRIP0OU45Q';
-    const CLIENT_SECRET = 'WHN5N2D445VVITV1QTVMOBJYXIJWLOEWOCST10SJKNYBEXHB';
-    const FSID = '412d2800f964a520df0c1fe3';
     const VERS = '20171227';
     const CATEGORIES = {
       american: '4bf58dd8d48988d14e941735',
@@ -109,11 +107,8 @@ class ListView extends Component {
   getFSDetails = (marker) => {
     const { map, infowindow } = this.props;
     const fSURL = 'https://api.foursquare.com/v2/venues/';
-    const CLIENT_ID = 'PODXK0FF2KJDN3B2R1JSDYI2PRFR1WZLI1VVJUCRIP0OU45Q';
-    const CLIENT_SECRET = 'WHN5N2D445VVITV1QTVMOBJYXIJWLOEWOCST10SJKNYBEXHB';
     const FSID =  marker.id; //'412d2800f964a520df0c1fe3';
     const VERS = '20171227';
-    const CATEGORY_ID = '4bf58dd8d48988d1c4941735' // restaurants
 
     const requestURL = `${fSURL}${FSID}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERS}`
     fetch(requestURL)

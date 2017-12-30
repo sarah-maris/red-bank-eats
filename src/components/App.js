@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
-import { mapStyles } from './data/mapStyles.js';
-import './App.css';
+import { mapStyles } from '../data/mapStyles.js';
 import ListView from './ListView'
-import spinner from './images/circles-loader.svg';
-import foursquare from './images/foursquare.png';
+import spinner from '../images/circles-loader.svg';
+import foursquare from '../images/foursquare.png';
 
 class App extends Component {
 
