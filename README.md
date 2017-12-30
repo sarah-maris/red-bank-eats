@@ -35,6 +35,7 @@ A new browser window should automatically open displaying the app.  If it doesn'
 * https://www.npmjs.com/package/react-async-script-loader
 * [SVG-Loaders by Sam Herber](https://github.com/SamHerbert/SVG-Loaders)
 * [CSS Tricks: Styling Texty Inputs](https://css-tricks.com/styling-texty-inputs-only/)
+* [CSS Tricks: Custom Scrollbars in WebKit](https://css-tricks.com/custom-scrollbars-in-webkit/)
 * [Foursquare API - Venue Search](https://developer.foursquare.com/docs/api/venues/search)
 * [Foursquare API - Venue Details](https://developer.foursquare.com/docs/api/venues/details)
 
