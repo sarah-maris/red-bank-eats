@@ -56,7 +56,6 @@ class App extends Component {
   render() {
 
     const { listOpen, map, infowindow, bounds, mapReady, mapCenter } = this.state;
-    const { toggleList } = this.props;
 
     return (
       <main className="container">

@@ -1,8 +1,4 @@
 import { CLIENT_ID, CLIENT_SECRET } from '../data/credentials'
-import noImage from '../images/no-image-available.png';
-import fsButton from '../images/foursquare-button.png';
-import foodIcon from '../images/food-marker.png';
-
 
 const sortName = (a, b) => {
   // remove case senstivity
@@ -56,7 +52,7 @@ export const getFSLocations = (mapCenter) => {
     })
   .then(data => {
     const places = data.response.venues;
-    const goodPlaces = places.filter( place => place.location.address && place.location.city && place.location.city == "Red Bank");
+    const goodPlaces = places.filter( place => place.location.address && place.location.city && place.location.city === "Red Bank");
 
     // sort before updating state
     goodPlaces.sort(sortName);
