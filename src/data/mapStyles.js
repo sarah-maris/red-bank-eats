@@ -158,5 +158,3 @@ export const mapStyles = [
         ]
     }
 ]
-
-//export default mapStyles

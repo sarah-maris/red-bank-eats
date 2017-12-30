@@ -34,7 +34,7 @@ class App extends Component {
 
       // set up bounds and infowindow to use later
       const bounds = new window.google.maps.LatLngBounds();
-      const infowindow = new window.google.maps.InfoWindow();
+      const infowindow = new window.google.maps.InfoWindow({maxWidth: 300});
 
       this.setState({
         map: map,

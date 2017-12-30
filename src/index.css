@@ -94,6 +94,67 @@ body {
   font-weight: 300;
 }
 
+/* infowindow */
+
+.place {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.place-title,
+.place-contact,
+.place-phone {
+  margin: 0 0 0 10px;
+}
+
+.place-data {
+  font-style: italic;
+  margin: 0 0 0 10px;
+}
+
+.place-price {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 10px 10px;
+}
+
+.place-phone {
+  color: #4e595d;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.place-contact,
+.place-data,
+.place-tip,
+.place-phone {
+  font-size: 14px;
+}
+
+.place-tip {
+  font-style: italic;
+}
+
+.place-link {
+  color: #f94877;
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 20px 0 0 10px;
+  padding: 10px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.place-link:hover,
+.place-phone:hover {
+  color: #3594c5;
+}
+
+.fs-link {
+  height: 30px;
+  vertical-align: middle;
+}
 /* scrollbar*/
 ::-webkit-scrollbar {
   width: 10px;

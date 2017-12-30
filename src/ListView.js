@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import noImage from './images/no-image-available.png';
+import fsButton from './images/foursquare-button.png';
+import PropTypes from 'prop-types';
 
 class ListView extends Component {
 
@@ -116,13 +118,32 @@ class ListView extends Component {
     .then(response => response.json())
     .then(data => {
       const place = data.response.venue;
+      console.log(place)
       marker.url = place.canonicalUrl ? place.canonicalUrl : 'https://foursquare.com/';
-      const photo = place.bestPhoto ? place.bestPhoto : {};
-      marker.photo = photo.prefix + 'width100' + photo.suffix;
-      marker.description = place.description ? place.description : '';
-      marker.infoContent = `<img src=${marker.photo} alt="${marker.title}">
-                            <a href="${marker.url}"><h3>${marker.title}</h3></a>`
-      console.log(marker.infoContent)
+      marker.photo = place.bestPhoto ? place.bestPhoto.prefix +
+                'width100' + place.bestPhoto.suffix
+                : noImage;
+      marker.phone = place.contact && place.contact.formattedPhone ? place.contact.formattedPhone : '';
+      marker.address = place.location.address;
+      marker.category = place.categories.length > 0 ? place.categories[0].name : '';
+      marker.price = place.attributes.groups[0].summary &&  place.attributes.groups[0].type === "price" ?
+                     place.attributes.groups[0].summary : '';
+      marker.tip = place.tips.count > 0 ? `"${place.tips.groups[0].items[0].text}"` : 'No tips available';
+      marker.infoContent = `<div class="place">
+                              <img class="place-photo" src=${marker.photo} alt="${marker.title}">
+                              <div class="place-meta">
+                                <h2 class="place-title">${marker.title}</h2>
+                                <p class="place-data">${marker.category}</p>
+                                <p class="place-price">${marker.price}</p>
+                                <p class="place-contact">${marker.address}</p>
+                                <a class="place-phone" href="tel:${marker.phone}">${marker.phone}</a>
+                              </div>
+                            </div>
+                            <p class="place-tip">${marker.tip}</p>
+                            <a class="place-link" href="${marker.url}" target="_blank">
+                              <span>Read more</span>
+                              <img class="fs-link" src="${fsButton}">
+                            </a>`
       infowindow.setContent(marker.infoContent);
       infowindow.open(map, marker);
       if (this.props.listOpen) this.props.toggleList();
