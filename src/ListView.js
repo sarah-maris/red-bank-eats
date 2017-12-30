@@ -90,7 +90,9 @@ class ListView extends Component {
     .then(data => {
       const places = data.response.venues;
       const goodPlaces = places.filter( place => place.location.address && place.location.city && place.location.city == "Red Bank");
-      // TODO alphabetize list
+
+      // sort before updating state
+      goodPlaces.sort(this.sortName);
       this.setState({
         allPlaces: goodPlaces,
         filteredPlaces: goodPlaces
@@ -131,15 +133,31 @@ class ListView extends Component {
     const { allPlaces } = this.state;
     const query = event.target.value.toLowerCase();
     this.setState({ query: query })
-    const result = allPlaces.filter((place) => {
-      console.log(place)
+    const filteredPlaces = allPlaces.filter((place) => {
       const match = place.name.toLowerCase().indexOf(query) > -1;
       place.marker.setVisible(match);
       return match;
     })
 
-    this.setState({filteredPlaces: result })
+    // sort before updating state
+    filteredPlaces.sort(this.sortName);
+
+    this.setState({filteredPlaces: filteredPlaces })
   }
+
+  sortName = (a, b) => {
+    // remove case senstivity
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    // if names are equal
+    return 0;
+  };
 
   showInfo = (place) => {
     // force marker click
