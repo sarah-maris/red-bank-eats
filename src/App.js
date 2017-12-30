@@ -56,6 +56,7 @@ class App extends Component {
   render() {
 
     const { listOpen, map, infowindow, bounds, mapReady, mapCenter } = this.state;
+    const { toggleList } = this.props;
 
     return (
       <div className="container">
@@ -74,6 +75,8 @@ class App extends Component {
               infowindow={infowindow}
               bounds={bounds}
               mapCenter={mapCenter}
+              toggleList={this.toggleList}
+              listOpen={listOpen}
             />
             : <p className="error"> Map has not loaded </p>
           }

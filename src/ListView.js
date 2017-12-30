@@ -7,7 +7,9 @@ class ListView extends Component {
     map: PropTypes.object.isRequired,
     infowindow: PropTypes.object.isRequired,
     bounds: PropTypes.object.isRequired,
-    mapCenter: PropTypes.object.isRequired
+    mapCenter: PropTypes.object.isRequired,
+    toggleList: PropTypes.func.isRequired,
+    listOpen: PropTypes.bool.isRequired
   }
 
   state = {
@@ -27,12 +29,12 @@ class ListView extends Component {
     const self = this;
 
     places.forEach( (location) =>  {
-      console.log(location.name)
+
       const position = {
         lat: location.location.lat,
         lng: location.location.lng
       }
-      console.log(location, position)
+
       location.marker = new window.google.maps.Marker({
         position: position,
         map: map,
@@ -121,6 +123,7 @@ class ListView extends Component {
       console.log(marker.infoContent)
       infowindow.setContent(marker.infoContent);
       infowindow.open(map, marker);
+      if (this.props.listOpen) this.props.toggleList();
     })
      .catch(error => alert('Foursquare request failed'));
   }
