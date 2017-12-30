@@ -36,6 +36,7 @@ class ListView extends Component {
   addMarkers (places) {
     const { map, bounds, infowindow, toggleList } = this.props;
     const self = this;
+
     places.forEach( (location) =>  {
 
       const position = {
@@ -55,10 +56,14 @@ class ListView extends Component {
 
       location.marker.addListener('click', function() {
         const marker = this;
+
+        // bounce marker three times then stop
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
         setTimeout(function() {
           marker.setAnimation(null);
         }, 2100);
+
+        // get venue details and display in infowindow
         getFSDetails(marker.id)
         .then(data => {
           const place = data.response.venue;
@@ -109,16 +114,21 @@ class ListView extends Component {
   }
 
   filterPlaces = (event) => {
+
     const { allPlaces } = this.state;
     const query = event.target.value.toLowerCase();
+
+    // update state so input box shows current query value
     this.setState({ query: query })
+
+    // filter list markers by name of location
     const filteredPlaces = allPlaces.filter((place) => {
       const match = place.name.toLowerCase().indexOf(query) > -1;
       place.marker.setVisible(match);
       return match;
     })
 
-    // sort before updating state
+    // sort array before updating state
     filteredPlaces.sort(this.sortName);
 
     this.setState({filteredPlaces: filteredPlaces })
@@ -139,6 +149,7 @@ class ListView extends Component {
           value={ query }
           onChange={ this.filterPlaces }
           className="query"
+          role="search"
         />
         {filteredPlaces.length > 0 ?
         <ul className="places-list">
@@ -151,7 +162,7 @@ class ListView extends Component {
           </li>
           )}
         </ul>
-        : <p className="error">No places match filter</p>
+        : <p id="filter-error" className="error">No places match filter</p>
         }
       </div>
     );

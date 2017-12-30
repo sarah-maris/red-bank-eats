@@ -59,14 +59,18 @@ class App extends Component {
     const { toggleList } = this.props;
 
     return (
-      <div className="container">
-        <div id="menu" className="toggle" onClick={this.toggleList}>
+      <main className="container">
+        <nav id="list-toggle" className="toggle" onClick={this.toggleList}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
           </svg>
-        </div>
-        <div className={ listOpen ? "list open" : "list"}>
-          <h2 className="appTitle">Red Bank Eats</h2>
+        </nav>
+        <section
+          id="restaurant-list"
+          className={ listOpen ? "list open" : "list"}
+          role="complementary"
+          >
+          <h2 className="app-title">Red Bank Eats</h2>
           <hr />
           { /* render markers only when map has loaded */
             mapReady ?
@@ -78,17 +82,17 @@ class App extends Component {
               toggleList={this.toggleList}
               listOpen={listOpen}
             />
-            : <p className="error"> Map has not loaded </p>
+            : <p id="map-error" className="error"> Map has not loaded </p>
           }
           <img src={foursquare} alt="Powered by Foursquare" className="fs-logo"/>
-        </div>
-        <div id="map" className="map">
+        </section>
+        <section id="map" className="map" role="complementary">
             <div className="loading">
               <h4 className="loading-message">Map is loading...</h4>
               <img src={spinner} className="spinner" alt="loading indicator" />
            </div>
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 }

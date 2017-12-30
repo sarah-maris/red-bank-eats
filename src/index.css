@@ -23,7 +23,7 @@ body {
   height: 100vh;
 }
 
-.appTitle {
+.app-title {
   color: #f94877;
   font: bold 34px/42px 'Jacques Francois Shadow', cursive;
   margin: 10px 0;
