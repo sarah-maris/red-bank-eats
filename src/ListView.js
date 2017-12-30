@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import noImage from './images/no-image-available.png';
 import fsButton from './images/foursquare-button.png';
+import foodIcon from './images/food-marker.png';
 import PropTypes from 'prop-types';
 
 class ListView extends Component {
@@ -41,7 +42,8 @@ class ListView extends Component {
         position: position,
         map: map,
         title: location.name,
-        id: location.id
+        id: location.id,
+        icon: foodIcon
       });
 
       bounds.extend(position);
