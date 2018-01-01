@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getFSLocations, getFSDetails } from '../apis/foursquare'
+import Place from './Place';
+import { getFSLocations, getFSDetails } from '../apis/foursquare';
 import noImage from '../images/no-image-available.png';
 import fsButton from '../images/foursquare-button.png';
 import foodIcon from '../images/food-marker.png';
@@ -180,12 +181,10 @@ class ListView extends Component {
           { apiReturned && filteredPlaces.length > 0 ?
           <ul className="places-list">
             {filteredPlaces.map((place, id) =>
-            <li
-              key={id}
-              className="place"
-              onClick={this.showInfo.bind(this, place)}
-              >{place.name}
-            </li>
+              <Place
+                key={place.id}
+                place={place} 
+              />
             )}
           </ul>
           : <p id="filter-error" className="error">No places match filter</p>

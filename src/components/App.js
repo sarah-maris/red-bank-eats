@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
-import { MAP_KEY } from '../data/credentials'
+import { MAP_KEY } from '../data/credentials';
 import { mapStyles } from '../data/mapStyles.js';
-import ListView from './ListView'
+import ListView from './ListView';
 import spinner from '../images/circles-loader.svg';
 import foursquare from '../images/foursquare.png';
 
@@ -14,12 +14,10 @@ class App extends Component {
     infowindow: {},
     bounds: {},
     mapReady: false,
-    // future use - location search
+    // for future use when add location search
     mapCenter : { lat: 40.346074, lng: -74.067858 },
     mapError: false
   }
-
-
 
   componentWillReceiveProps({isScriptLoadSucceed}){
 
@@ -47,12 +45,12 @@ class App extends Component {
     // alert user if map request fails
     } else if ( !this.state.mapReady ) {
       console.log("Map did not load");
-      this.setState({mapError: true})
+      this.setState({mapError: true});
     }
   }
 
   toggleList = () => {
-    this.setState( { listOpen: !this.state.listOpen})
+    this.setState( { listOpen: !this.state.listOpen});
   }
 
   render() {
@@ -96,9 +94,7 @@ class App extends Component {
                 <h4 className="loading-message">Map is loading...</h4>
                 <img src={spinner} className="spinner" alt="loading indicator" />
              </div>
-
         }
-
         </section>
       </main>
     );
