@@ -3,6 +3,7 @@ import { getFSLocations, getFSDetails } from '../apis/foursquare'
 import noImage from '../images/no-image-available.png';
 import fsButton from '../images/foursquare-button.png';
 import foodIcon from '../images/food-marker.png';
+import spinner from '../images/circles-loader.svg';
 import PropTypes from 'prop-types';
 
 class ListView extends Component {
@@ -19,7 +20,8 @@ class ListView extends Component {
   state = {
     query: '',
     allPlaces: [],
-    filteredPlaces: []
+    filteredPlaces: null,
+    apiReturned: false
   }
 
   componentDidMount () {
@@ -27,10 +29,12 @@ class ListView extends Component {
     .then( places => {
       this.setState({
         allPlaces: places,
-        filteredPlaces: places
+        filteredPlaces: places,
+        apiReturned: true
       });
-      this.addMarkers(places)
-    });
+      if(places) this.addMarkers(places)
+    })
+    .catch(error => this.setState({apiReturned: true}));
   }
 
   addMarkers (places) {
@@ -45,8 +49,8 @@ class ListView extends Component {
       }
 
       location.marker = new window.google.maps.Marker({
-        position: position,
-        map: map,
+        position,
+        map,
         title: location.name,
         id: location.id,
         icon: foodIcon
@@ -69,16 +73,17 @@ class ListView extends Component {
           const place = data.response.venue;
 
           // set up fallbacks in case data is incomplete
-          marker.url = place.canonicalUrl ? place.canonicalUrl : 'https://foursquare.com/';
-          marker.photo = place.bestPhoto ? place.bestPhoto.prefix +
-                    'width100' + place.bestPhoto.suffix
+
+          const { canonicalUrl, bestPhoto, contact, location, categories, attributes, tips } = place; // destructuring
+          marker.url = canonicalUrl ? canonicalUrl : 'https://foursquare.com/';
+          marker.photo = bestPhoto ? `${bestPhoto.prefix}width100${bestPhoto.suffix}` // ES6 template literals
                     : noImage;
-          marker.phone = place.contact && place.contact.formattedPhone ? place.contact.formattedPhone : '';
-          marker.address = place.location.address;
-          marker.category = place.categories.length > 0 ? place.categories[0].name : '';
-          marker.price = place.attributes.groups[0].summary &&  place.attributes.groups[0].type === "price" ?
-                         place.attributes.groups[0].summary : '';
-          marker.tip = place.tips.count > 0 ? `"${place.tips.groups[0].items[0].text}"` : 'No tips available';
+          marker.phone = contact && contact.formattedPhone ? contact.formattedPhone : '';
+          marker.address = location.address;
+          marker.category = categories.length > 0 ? categories[0].name : '';
+          marker.price = attributes.groups[0].summary &&  attributes.groups[0].type === "price" ?
+                          attributes.groups[0].summary : '';
+          marker.tip = tips.count > 0 ? `"${tips.groups[0].items[0].text}"` : 'No tips available';
 
           // build infowindonw content
           marker.infoContent = `<div class="place">
@@ -106,6 +111,20 @@ class ListView extends Component {
             toggleList()
           };
         })
+        .catch(error =>  {
+          marker.infoContent = `<div class="venue-error">
+                  <h3>Foursquare Venue Details request for ${marker.title} failed</h3>
+                  <p>Try again later...</p>
+                </div>`
+          // set content and open window
+          infowindow.setContent(marker.infoContent);
+          infowindow.open(map, marker);
+
+          // close list view in mobile if open so infowindow is not hidden by list
+          if (self.props.listOpen) {
+            toggleList()
+          };
+        });
       });
     });
 
@@ -140,32 +159,50 @@ class ListView extends Component {
   }
 
   render() {
-    const {filteredPlaces, query} = this.state;
 
-    return (
-      <div className="list-view">
-        <input type="text"
-          placeholder="filter by name"
-          value={ query }
-          onChange={ this.filterPlaces }
-          className="query"
-          role="search"
-        />
-        {filteredPlaces.length > 0 ?
-        <ul className="places-list">
-          {filteredPlaces.map((place, id) =>
-          <li
-            key={id}
-            className="place"
-            onClick={this.showInfo.bind(this, place)}
-            >{place.name}
-          </li>
-          )}
-        </ul>
-        : <p id="filter-error" className="error">No places match filter</p>
-        }
-      </div>
-    );
+    const {apiReturned, filteredPlaces, query} = this.state;
+
+    // API request fails
+    if(apiReturned && !filteredPlaces) {
+      return <div> Foursquare API request failed. Please try again later.</div>
+
+   // API request returns successfully
+    } else if( apiReturned && filteredPlaces ){
+      return (
+        <div className="list-view">
+          <input type="text"
+            placeholder="filter by name"
+            value={ query }
+            onChange={ this.filterPlaces }
+            className="query"
+            role="search"
+          />
+          { apiReturned && filteredPlaces.length > 0 ?
+          <ul className="places-list">
+            {filteredPlaces.map((place, id) =>
+            <li
+              key={id}
+              className="place"
+              onClick={this.showInfo.bind(this, place)}
+              >{place.name}
+            </li>
+            )}
+          </ul>
+          : <p id="filter-error" className="error">No places match filter</p>
+          }
+        </div>
+      );
+
+    // API request has not returned yet
+    } else {
+      return (
+        <div className="loading-fs">
+          <h4 className="loading-message">Loading Restaurants...</h4>
+          <img src={spinner} className="spinner" alt="loading indicator" />
+       </div>
+     )
+    }
+
   }
 }
 

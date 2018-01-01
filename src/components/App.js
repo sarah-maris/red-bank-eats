@@ -15,7 +15,8 @@ class App extends Component {
     bounds: {},
     mapReady: false,
     // future use - location search
-    mapCenter : { lat: 40.346074, lng: -74.067858 }
+    mapCenter : { lat: 40.346074, lng: -74.067858 },
+    mapError: false
   }
 
 
@@ -45,7 +46,8 @@ class App extends Component {
 
     // alert user if map request fails
     } else if ( !this.state.mapReady ) {
-      alert("Map did not load");
+      console.log("Map did not load");
+      this.setState({mapError: true})
     }
   }
 
@@ -55,7 +57,7 @@ class App extends Component {
 
   render() {
 
-    const { listOpen, map, infowindow, bounds, mapReady, mapCenter } = this.state;
+    const { listOpen, map, infowindow, bounds, mapReady, mapCenter, mapError } = this.state;
 
     return (
       <main className="container">
@@ -81,15 +83,22 @@ class App extends Component {
               toggleList={this.toggleList}
               listOpen={listOpen}
             />
-            : <p id="map-error" className="error"> Map has not loaded </p>
+            : <p>We are experiencing loading issues. Please check your internet connection</p>
           }
           <img src={foursquare} alt="Powered by Foursquare" className="fs-logo"/>
         </section>
         <section id="map" className="map" role="complementary">
-            <div className="loading">
-              <h4 className="loading-message">Map is loading...</h4>
-              <img src={spinner} className="spinner" alt="loading indicator" />
-           </div>
+          { mapError ?
+            <div id="map-error" className="error">
+              Google Maps did not load.  Please try again later...
+            </div>
+            : <div className="loading-map">
+                <h4 className="loading-message">Map is loading...</h4>
+                <img src={spinner} className="spinner" alt="loading indicator" />
+             </div>
+
+        }
+
         </section>
       </main>
     );

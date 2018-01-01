@@ -14,14 +14,9 @@ const sortName = (a, b) => {
   return 0;
 };
 
-// common params
+// url and params
+const fSURL = 'https://api.foursquare.com/v2/venues/';
 const VERS = '20171227';
-
-// url for Venue details search
-const fSVURL = 'https://api.foursquare.com/v2/venues/';
-
-// url and params specific to locations search
-const fSLURL = 'https://api.foursquare.com/v2/venues/';
 const RADIUS = '1250'
 const CATEGORIES = {
   american: '4bf58dd8d48988d14e941735',
@@ -43,7 +38,7 @@ const CATEGORY_ID = Object.keys(CATEGORIES).map((cat) => CATEGORIES[cat]);
 
 export const getFSLocations = (mapCenter) => {
 
-  const requestURL = `${fSLURL}search?ll=${mapCenter.lat},${mapCenter.lng}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERS}&categoryId=${CATEGORY_ID}&radius=${RADIUS}&limit=50`
+  const requestURL = `${fSURL}search?ll=${mapCenter.lat},${mapCenter.lng}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERS}&categoryId=${CATEGORY_ID}&radius=${RADIUS}&limit=50`
   return fetch(requestURL)
   .then(response => {
       if (!response.ok) {
@@ -59,19 +54,18 @@ export const getFSLocations = (mapCenter) => {
 
     return goodPlaces;
   })
-   .catch(error => alert('Foursquare locations request failed'));
+
 }
 
 export const getFSDetails = (fsid) => {
   // use Foursquare id for search
   const FSID =  fsid;
 
-  const requestURL = `${fSVURL}${FSID}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERS}`
+  const requestURL = `${fSURL}${FSID}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERS}`
   return  fetch(requestURL)
   .then(response => {
       if (!response.ok) {
         throw response
       } else  return response.json()
     })
-   .catch(error => alert('Foursquare details request failed'));
 }

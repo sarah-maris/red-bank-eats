@@ -60,6 +60,8 @@ body {
 .error {
   color: #f94877;
   font-style: italic;
+  padding-top: 400px;
+  text-align: center;
 }
 
 .toggle {
@@ -80,12 +82,19 @@ body {
   transform: translate(0, 0);
 }
 
-.loading {
+.loading-map {
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
-  position: absolute;
+  text-align: center;
+}
+
+.loading-fs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -154,6 +163,11 @@ body {
 .fs-link {
   height: 30px;
   vertical-align: middle;
+}
+
+.venue-error {
+  color: #f94877;
+  text-align: center;
 }
 /* scrollbar*/
 ::-webkit-scrollbar {
