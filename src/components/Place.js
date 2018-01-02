@@ -17,8 +17,10 @@ class Place extends Component {
     const { place } = this.props;
 
     return (
-      <li className="place" onClick={this.showInfo} >
-        {place.name}
+      <li className="place">
+        <div onClick={this.showInfo} role="button" tabindex="0">
+          {place.name}
+        </div>
       </li>
     );
   }
