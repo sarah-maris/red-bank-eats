@@ -177,13 +177,14 @@ class ListView extends Component {
             onChange={ this.filterPlaces }
             className="query"
             role="search"
+            aria-labelledby="text filter"
           />
           { apiReturned && filteredPlaces.length > 0 ?
           <ul className="places-list">
             {filteredPlaces.map((place, id) =>
               <Place
                 key={place.id}
-                place={place} 
+                place={place}
               />
             )}
           </ul>
