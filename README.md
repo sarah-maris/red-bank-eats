@@ -55,11 +55,13 @@ In this case the site will be hosted at [http://localhost:5000](http://localhost
 
 You can confirm that the service worker is registered with this message in the console
 
-![Service worker message](src\images\confirm-service-worker.png)
+![Service worker message](https://github.com/sarah-maris/react-neighborhood-map/raw/master/src/images/confirm-service-worker.png)
+
+react-neighborhood-map/src/images/foursquare-button.png
 
 or in the Applications tab of Dev Tools:
 
-![Service worker in Applications tab](src\images\confirm-service-worker2.png)
+![Service worker in Applications tab](https://github.com/sarah-maris/react-neighborhood-map/raw/master/src/images/confirm-service-worker2.png)
 
 ## How to Use the App
 * The app will load displaying a map of Red Bank with markers for each restaurant and a list of restaurants in the sidebar
