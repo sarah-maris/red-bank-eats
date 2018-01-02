@@ -27,7 +27,7 @@ A new browser window should automatically open displaying the app.  If it doesn'
 
 ## How to Load the App in Production Mode
 
-You can run a hosted version of the app at **[http://damaging-knowledge.surge.sh/](http://damaging-knowledge.surge.sh/)**
+You can run a hosted version of the app at **[https://damaging-knowledge.surge.sh/](https://damaging-knowledge.surge.sh/)**
 
 To run the app in production mode locally run:
 ```
@@ -42,6 +42,24 @@ For Python 3.x, the command is:
 -m http.server 8080
 ```
 In either case navigate to [http://localhost:8000](http://localhost:8000) in your browser.
+
+Or if you prefer you can use Node [serve](https://github.com/zeit/serve).  If you do not have it installed you can install it with:
+```
+npm install -g serve
+```
+and then navigate into the build directory and run
+```
+serve -s
+```
+In this case the site will be hosted at [http://localhost:5000](http://localhost:5000)
+
+You can confirm that the service worker is registered with this message in the console
+
+![Service worker message](src\images\confirm-service-worker.png)
+
+or in the Applications tab of Dev Tools:
+
+![Service worker in Applications tab](src\images\confirm-service-worker2.png)
 
 ## How to Use the App
 * The app will load displaying a map of Red Bank with markers for each restaurant and a list of restaurants in the sidebar
