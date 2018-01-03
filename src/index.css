@@ -64,6 +64,12 @@ body {
   text-align: center;
 }
 
+.empty-input {
+  color: #f94877;
+  font-style: italic;
+  text-align: center;
+}
+
 .toggle {
   background: #fff;
   border: 2px solid #4e595d;

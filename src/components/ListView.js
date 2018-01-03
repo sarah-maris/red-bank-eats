@@ -191,7 +191,7 @@ class ListView extends Component {
               />
             )}
           </ul>
-          : <p id="filter-error" className="error">No places match filter</p>
+          : <p id="filter-error" className="empty-input">No places match filter</p>
           }
         </div>
       );
