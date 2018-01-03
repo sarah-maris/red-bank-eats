@@ -16,7 +16,8 @@ class App extends Component {
     mapReady: false,
     // for future use when add location search
     mapCenter : { lat: 40.346074, lng: -74.067858 },
-    mapError: false
+    mapError: false,
+    width: window.innerWidth
   }
 
   componentWillReceiveProps({isScriptLoadSucceed}){
@@ -50,7 +51,9 @@ class App extends Component {
   }
 
   toggleList = () => {
-    this.setState( { listOpen: !this.state.listOpen});
+    if (this.state.width < 600) {
+      this.setState( { listOpen: !this.state.listOpen});
+    }
   }
 
   render() {
