@@ -20,6 +20,10 @@ class App extends Component {
     width: window.innerWidth
   }
 
+  componentDidMount() {
+    window.addEventListener("resize", this.updateWidth);
+  }
+
   componentWillReceiveProps({isScriptLoadSucceed}){
 
     // Check if script is loaded and if map is defined
@@ -53,6 +57,14 @@ class App extends Component {
   toggleList = () => {
     if (this.state.width < 600) {
       this.setState( { listOpen: !this.state.listOpen});
+    }
+  }
+
+  updateWidth = () => {
+    const { map, bounds } = this.state;
+    this.setState( { width: window.innerWidth });
+    if (map && bounds) {
+      map.fitBounds(bounds)
     }
   }
 
