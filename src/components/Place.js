@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 class Place extends Component {
 
   static propTypes = {
-    place: PropTypes.object.isRequired
+    place: PropTypes.object.isRequired,
+    listOpen: PropTypes.bool.isRequired
   }
 
   showInfo = () => {
@@ -14,11 +15,16 @@ class Place extends Component {
 
   render() {
 
-    const { place } = this.props;
+    const { place, listOpen } = this.props;
 
     return (
       <li className="place">
-        <div onClick={this.showInfo} role="button" tabindex="0">
+        <div
+          onClick={this.showInfo}
+          onKeyPress={this.showInfo}
+          role="button"
+          tabIndex={ listOpen ? '0' : '-1' }
+          >
           {place.name}
         </div>
       </li>

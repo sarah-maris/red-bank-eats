@@ -113,7 +113,7 @@ class ListView extends Component {
           };
         })
         .catch(error =>  {
-          marker.infoContent = `<div class="venue-error">
+          marker.infoContent = `<div class="venue-error"  role="alert">
                   <h3>Foursquare Venue Details request for ${marker.title} failed</h3>
                   <p>Try again later...</p>
                 </div>`
@@ -161,7 +161,8 @@ class ListView extends Component {
 
   render() {
 
-    const {apiReturned, filteredPlaces, query} = this.state;
+    const { apiReturned, filteredPlaces, query } = this.state;
+    const { listOpen } = this.props;
 
     // API request fails
     if(apiReturned && !filteredPlaces) {
@@ -178,6 +179,7 @@ class ListView extends Component {
             className="query"
             role="search"
             aria-labelledby="text filter"
+            tabIndex={ listOpen ? '0' : '-1' }
           />
           { apiReturned && filteredPlaces.length > 0 ?
           <ul className="places-list">
@@ -185,6 +187,7 @@ class ListView extends Component {
               <Place
                 key={place.id}
                 place={place}
+                listOpen={listOpen}
               />
             )}
           </ul>
