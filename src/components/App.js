@@ -61,7 +61,7 @@ class App extends Component {
     const { listOpen, map, infowindow, bounds, mapReady, mapCenter, mapError } = this.state;
 
     return (
-      <div className="container">
+      <div className="container" role="main">
         <nav id="list-toggle" className="toggle" onClick={this.toggleList}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
@@ -71,6 +71,7 @@ class App extends Component {
           id="restaurant-list"
           className={ listOpen ? "list open" : "list"}
           role="complementary"
+          tabIndex={ listOpen ? '0' : '-1' }
           >
           <h1 className="app-title">Red Bank Eats</h1>
           <hr />
@@ -88,9 +89,9 @@ class App extends Component {
           }
           <img src={foursquare} alt="Powered by Foursquare" className="fs-logo"/>
         </section>
-        <section id="map" className="map" role="main">
+        <section id="map" className="map" role="application">
           { mapError ?
-            <div id="map-error" className="error">
+            <div id="map-error" className="error" role="alert">
               Google Maps did not load.  Please try again later...
             </div>
             : <div className="loading-map">
