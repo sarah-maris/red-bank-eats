@@ -55,8 +55,15 @@ class App extends Component {
   }
 
   toggleList = () => {
-    if (this.state.width < 600) {
-      this.setState( { listOpen: !this.state.listOpen});
+
+    const { width, listOpen, infowindow } = this.state;
+
+    if (width < 600) {
+      // close infowindow if listview is opening
+      if (!listOpen) {
+        infowindow.close();
+      }
+      this.setState( { listOpen: !listOpen});
     }
   }
 

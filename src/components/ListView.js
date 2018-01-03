@@ -136,10 +136,14 @@ class ListView extends Component {
   filterPlaces = (event) => {
 
     const { allPlaces } = this.state;
+    const { infowindow } = this.props;
     const query = event.target.value.toLowerCase();
 
     // update state so input box shows current query value
     this.setState({ query: query })
+
+    // close infoWindow when filter runs
+    infowindow.close();
 
     // filter list markers by name of location
     const filteredPlaces = allPlaces.filter((place) => {
