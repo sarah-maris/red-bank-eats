@@ -23,8 +23,7 @@ class App extends Component {
     window.addEventListener("resize", this.updateWidth);
   }
 
-  componentWillReceiveProps({isScriptLoadSucceed}){
-
+  componentDidUpdate({ isScriptLoadSucceed }) {
     // Check if script is loaded and if map is defined
     if (isScriptLoadSucceed && !this.state.mapReady) {
       // create map
@@ -45,7 +44,6 @@ class App extends Component {
         mapReady: true
       });
 
-      console.log("Map did not load");
       // alert user if map request fails
     } else if (!this.state.mapReady) {
       this.setState({ mapError: true });
