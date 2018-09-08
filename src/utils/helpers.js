@@ -1,7 +1,8 @@
 import noImage from "../images/no-image-available.png";
 import fsButton from "../images/foursquare-button.png";
 
-// set up fallbacks in case data is incomplete
+
+  // set up fallbacks in case data is incomplete
 export const checkData = (marker, data) => {
   const place = data.response.venue;
 
@@ -32,6 +33,7 @@ export const checkData = (marker, data) => {
 
   return marker;
 };
+
 
 // build infowindow content
 export const buildInfoContent = marker => {
