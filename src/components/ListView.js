@@ -37,7 +37,7 @@ class ListView extends Component {
         });
         if (places) this.addMarkers(places);
       })
-      .catch(error => this.setState({ apiReturned: true }));
+      .catch(error => this.setState({ apiReturned: false }));
   }
 
   addMarkers(places) {
@@ -65,9 +65,7 @@ class ListView extends Component {
 
         // bounce marker three times then stop
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
-        setTimeout(function() {
-          marker.setAnimation(null);
-        }, 2100);
+        setTimeout(() => marker.setAnimation(null), 2100);
 
         // get venue details and display in infowindow
         getFSDetails(marker.id)
