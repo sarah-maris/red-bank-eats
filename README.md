@@ -31,7 +31,7 @@ A new browser window should automatically open displaying the app. If it doesn't
 
 ## How to Load the App in Production Mode
 
-You can run a hosted version of the app at **[https://damaging-knowledge.surge.sh/](https://damaging-knowledge.surge.sh/)**
+You can run a hosted version of the app at **[redbankeats.surge.sh](https://redbankeats.surge.sh/)**
 
 To run the app in production mode locally run:
 
@@ -76,6 +76,20 @@ react-neighborhood-map/src/images/foursquare-button.png
 or in the Applications tab of Dev Tools:
 
 ![Service worker in Applications tab](https://github.com/sarah-maris/react-neighborhood-map/raw/master/src/images/confirm-service-worker2.png)
+
+## Adding required Foursquare and Google Maps credentials
+The app will not run until you add Foursquare and Google Map keys to the project. They should be stored in the `credentials.js` file in the `data` folder.  See sample at `data.credentials-sample.js.
+
+### Foursquare
+You can get the Foursquare API keys by signing up for a free personal account here:  **[Foursquare Developers Sign-up](https://foursquare.com/developers/signup)**
+
+Log-in and click "Create a new app".  Paste the *Client ID* and *Client Secret* keys in `credentials.js`
+
+### Google Maps
+To get a Google Maps API key follow the directions here:  **[Google Maps:
+Get API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)**.
+
+Choose the Maps platform and enable "Google Maps Platform". To protect your API from unwanted usage make sure you add an Allowed Referred (e.g. `localhost`) in the API console.
 
 ## How to Use the App
 
