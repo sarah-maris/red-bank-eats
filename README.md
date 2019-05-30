@@ -33,7 +33,7 @@ A new browser window should automatically open displaying the app. If it doesn't
 
 You can run a hosted version of the app at **[redbankeats.surge.sh](https://redbankeats.surge.sh/)**
 
-![Red Bank Eats screenshot](src\images\red-bank-eats-screenshot.jpg?raw=true)
+![Red Bank Eats screenshot](src/images/red-bank-eats-screenshot.jpg?raw=true)
 
 To run the app in production mode locally run:
 
